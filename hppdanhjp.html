@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Proyek</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #EEEEEE;
+        }
+        .subbtn {
+          background-color: #D5E5D5;
+          font-weight: bold;
+          border: 1px solid black;
+        }
+    </style>
+
+</head>
+<body style="font-family: monospace;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>HPP dan HJP Calculator</h1>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-6 mb-5">
+                <h2>Tabel Alat</h2>
+                <form id="form-alat">
+                    <div class="form-group">
+                        <label for="nama-alat">Nama Alat</label>
+                        <input type="text" id="nama-alat" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jumlah-alat">Jumlah</label>
+                        <input type="number" id="jumlah-alat" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="satuan-alat">Satuan</label>
+                        <input type="text" id="satuan-alat" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="harga-alat">Harga</label>
+                        <input type="text" id="harga-alat" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn subbtn">+</button>
+                </form>
+                <br>
+                <table id="tabel-alat" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Alat</th>
+                            <th>Jumlah</th>
+                            <th>Satuan</th>
+                            <th>Harga</th>
+                            <th>Total</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabel-body-alat">
+                    </tbody>
+                </table>
+                <p id="total-alat">Total: Rp <span id="total-harga-alat">0</span></p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <h2>Tabel Bahan</h2>
+                <form id="form-bahan">
+                    <div class="form-group">
+                        <label for="nama-bahan">Nama Bahan</label>
+                        <input type="text" id="nama-bahan" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jumlah-bahan">Jumlah</label>
+                        <input type="number" id="jumlah-bahan" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="satuan-bahan">Satuan</label>
+                        <input type="text" id="satuan-bahan" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="harga-bahan">Harga</label>
+                        <input type="text" id="harga-bahan" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn subbtn">+</button>
+                </form>
+                <br>
+                <table id="tabel-bahan" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Bahan</th>
+                            <th>Jumlah</th>
+                            <th>Satuan</th>
+                            <th>Harga</th>
+                            <th>Total</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabel-body-bahan">
+                    </tbody>
+                </table>
+                <p id="total-bahan">Total: Rp <span id="total-harga-bahan">0</span></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p id="total-semua">Total Keseluruhan: Rp <span id="total-keseluruhan">0</span>
+                    <button class="btn btn-secondary" id="tampilkan-rumus-total" style="margin-left: 10px;"><i class="fa-solid fa-eye"></i></button>
+                    <div id="tampilan-penghitungan-total" style="display: none; margin-top: 10px;">
+                        <h4>Rumus Penghitungan:</h4>
+                        <p>Total Keseluruhan = Total Bahan + Total Alat</p>
+                        <p>Total Bahan: Rp <span id="total-bahan-penghitungan-total">0</span></p>
+                        <p>Total Alat: Rp <span id="total-alat-penghitungan-total">0</span></p>
+                        <p>Total Keseluruhan: Rp <span id="total-keseluruhan-penghitungan-total">0</span></p>
+                    </div>
+                </p>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Harga Per Produk</h3>
+                <p id="harga-per-produk">Rp <span id="harga-per-produk-value">0</span></p>
+                <button class="btn subbtn" id="hitung-harga-per-produk">Hitung Harga Per Produk</button>
+                <button class="btn btn-secondary" id="tampilkan-rumus"><i class="fa-solid fa-eye"></i></button>
+                <div id="tampilan-penghitungan" style="display: none;">
+                    <h4>Rumus Penghitungan:</h4>
+                    <p>(Total Bahan + Total Alat) / 100</p>
+                    <p>Total Bahan: Rp <span id="total-bahan-penghitungan">0</span></p>
+                    <p>Total Alat: Rp <span id="total-alat-penghitungan">0</span></p>
+                    <p>Harga Per Produk: Rp <span id="harga-per-produk-penghitungan">0</span></p>
+                </div>
+                <br>
+                <br>
+                <h3>Harga Jual Produk</h3>
+                <div class="form-group">
+                    <label for="margin">Margin</label>
+                    <input type="number" id="margin" class="form-control" value="0" required>
+                </div>
+                <button class="btn subbtn" id="hitung-harga-jual-produk">Hitung Harga Jual Produk</button>
+                <button class="btn btn-secondary" id="tampilkan-rumus-harga-jual"><i class="fa-solid fa-eye"></i></button>
+                <p id="harga-jual-produk">Rp <span id="harga-jual-produk-value">0</span></p>
+                <div id="tampilan-penghitungan-harga-jual" style="display: none;">
+                    <h4>Rumus Penghitungan:</h4>
+                    <p>Harga Jual Produk = Harga Per Produk / (1 - Margin)</p>
+                    <p>Harga Per Produk: Rp <span id="harga-per-produk-penghitungan-harga-jual">0</span></p>
+                    <p>Margin: <span id="margin-penghitungan-harga-jual">0</span></p>
+                    <p>Harga Jual Produk: Rp <span id="harga-jual-produk-penghitungan-harga-jual">0</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="row">
+  <div class="col text-center mb-3 mt-5">
+    bagusbintangmaha@gmail.com
+  </div>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        let dataBahan = [];
+        let dataAlat = [];
+
+        $(document).ready(function() {
+            $('#form-bahan').submit(function(e) {
+                e.preventDefault();
+                let namaBahan = $('#nama-bahan').val();
+                let jumlahBahan = parseInt($('#jumlah-bahan').val());
+                let satuanBahan = $('#satuan-bahan').val();
+                let hargaBahan = parseInt($('#harga-bahan').val().replace(/,/g, ''));
+                let totalBahan = jumlahBahan * hargaBahan;
+
+                dataBahan.push({
+                    namaBahan: namaBahan,
+                    jumlah: jumlahBahan,
+                    satuan: satuanBahan,
+                    harga: hargaBahan,
+                    total: totalBahan
+                });
+
+                $('#nama-bahan').val('');
+                $('#jumlah-bahan').val('');
+                $('#satuan-bahan').val('');
+                $('#harga-bahan').val('');
+
+                updateTabelBahan();
+            });
+
+            function updateTabelBahan() {
+                $('#tabel-body-bahan').html('');
+                let no = 1;
+                let totalSemuaBahan = 0;
+                dataBahan.forEach(function(data, index) {
+                    $('#tabel-body-bahan').append(`
+                        <tr>
+                            <td>${no}</td>
+                            <td>${data.namaBahan}</td>
+                            <td>${data.jumlah}</td>
+                            <td>${data.satuan}</td>
+                            <td>Rp ${data.harga.toLocaleString()}</td>
+                            <td>Rp ${data.total.toLocaleString()}</td>
+                            <td><span class="hapus-data-bahan" data-index="${index}" style="color: white; background-color: red; padding: 5px; border-radius: 5px; cursor: pointer;"><i class="fa-solid fa-x"></i></span></td>
+                        </tr>
+                    `);
+                    totalSemuaBahan += data.total;
+                    no++;
+                });
+                $('#total-harga-bahan').html(totalSemuaBahan.toLocaleString());
+                updateTotalKeseluruhan();
+            }
+
+            $(document).on('click', '.hapus-data-bahan', function() {
+                let index = $(this).data('index');
+                dataBahan.splice(index, 1);
+                updateTabelBahan();
+            });
+
+            $('#form-alat').submit(function(e) {
+                e.preventDefault();
+                let namaAlat = $('#nama-alat').val();
+                let jumlahAlat = parseInt($('#jumlah-alat').val());
+                let satuanAlat = $('#satuan-alat').val();
+                let hargaAlat = parseInt($('#harga-alat').val().replace(/,/g, ''));
+                let totalAlat = jumlahAlat * hargaAlat;
+
+                dataAlat.push({
+                    namaAlat: namaAlat,
+                    jumlah: jumlahAlat,
+                    satuan: satuanAlat,
+                    harga: hargaAlat,
+                    total: totalAlat
+                });
+
+                $('#nama-alat').val('');
+                $('#jumlah-alat').val('');
+                $('#satuan-alat').val('');
+                $('#harga-alat').val('');
+
+                updateTabelAlat();
+            });
+
+            function updateTabelAlat() {
+                $('#tabel-body-alat').html('');
+                let no = 1;
+                let totalSemuaAlat = 0;
+                dataAlat.forEach(function(data, index) {
+                    $('#tabel-body-alat').append(`
+                        <tr>
+                            <td>${no}</td>
+                            <td>${data.namaAlat}</td>
+                            <td>${data.jumlah}</td>
+                            <td>${data.satuan}</td>
+                            <td>Rp ${data.harga.toLocaleString()}</td>
+                            <td>Rp ${data.total.toLocaleString()}</td>
+                            <td><span class="hapus-data-alat" data-index="${index}" style="color: white; background-color: red; padding: 5px; border-radius: 5px; cursor: pointer;"><i class="fa-solid fa-x"></i></span></td>
+                        </tr>
+                    `);
+                    totalSemuaAlat += data.total;
+                    no++;
+                });
+                $('#total-harga-alat').html(totalSemuaAlat.toLocaleString());
+                updateTotalKeseluruhan();
+            }
+
+            $(document).on('click', '.hapus-data-alat', function() {
+                let index = $(this).data('index');
+                dataAlat.splice(index, 1);
+                updateTabelAlat();
+            });
+
+            function updateTotalKeseluruhan() {
+                let totalSemuaBahan = dataBahan.reduce((acc, current) => acc + current.total, 0);
+                let totalSemuaAlat = dataAlat.reduce((acc, current) => acc + current.total, 0);
+                let totalKeseluruhan = totalSemuaBahan + totalSemuaAlat;
+                $('#total-keseluruhan').html(totalKeseluruhan.toLocaleString());
+                $('#total-bahan-penghitungan-total').html(totalSemuaBahan.toLocaleString());
+                $('#total-alat-penghitungan-total').html(totalSemuaAlat.toLocaleString());
+                $('#total-keseluruhan-penghitungan-total').html(totalKeseluruhan.toLocaleString());
+            }
+
+            $('#hitung-harga-per-produk').click(function() {
+                let totalSemuaBahan = dataBahan.reduce((acc, current) => acc + current.total, 0);
+                let totalSemuaAlat = dataAlat.reduce((acc, current) => acc + current.total, 0);
+                let hargaPerProduk = (totalSemuaBahan + totalSemuaAlat) / 100;
+                $('#harga-per-produk-value').html(hargaPerProduk.toLocaleString());
+                $('#total-bahan-penghitungan').html(totalSemuaBahan.toLocaleString());
+                $('#total-alat-penghitungan').html(totalSemuaAlat.toLocaleString());
+                $('#harga-per-produk-penghitungan').html(hargaPerProduk.toLocaleString());
+                $('#tampilan-penghitungan').show();
+            });
+
+            $('#tampilkan-rumus').click(function() {
+                if ($('#tampilan-penghitungan').is(':hidden')) {
+                    $('#tampilan-penghitungan').show();
+                } else {
+                    $('#tampilan-penghitungan').hide();
+                }
+            });
+
+            $('#tampilkan-rumus-total').click(function() {
+                if ($('#tampilan-penghitungan-total').is(':hidden')) {
+                    $('#tampilan-penghitungan-total').show();
+                } else {
+                    $('#tampilan-penghitungan-total').hide();
+                }
+            });
+
+            $('#hitung-harga-jual-produk').click(function() {
+                if($('#harga-per-produk-value').text() === '0') {
+                    return;
+                }
+                let hargaPerProduk = parseFloat($('#harga-per-produk-value').text().replace(/,/g, ''));
+                let margin = parseFloat($('#margin').val());
+                let hargaJualProduk = hargaPerProduk / (1 - margin);
+                $('#harga-jual-produk-value').html(hargaJualProduk.toLocaleString());
+                $('#harga-per-produk-penghitungan-harga-jual').html(hargaPerProduk.toLocaleString());
+                $('#margin-penghitungan-harga-jual').html(margin);
+                $('#harga-jual-produk-penghitungan-harga-jual').html(hargaJualProduk.toLocaleString());
+                $('#tampilan-penghitungan-harga-jual').show();
+            });
+
+            $('#tampilkan-rumus-harga-jual').click(function() {
+                if ($('#tampilan-penghitungan-harga-jual').is(':hidden')) {
+                    $('#tampilan-penghitungan-harga-jual').show();
+                } else {
+                    $('#tampilan-penghitungan-harga-jual').hide();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
