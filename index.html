@@ -3,34 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplikasi Proyek</title>
+    <title>HPP HJP Calc</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <style>
         body {
-            padding: 20px;
             background-color: #EEEEEE;
+            font-family: monospace;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            
         }
         .subbtn {
           background-color: #D5E5D5;
           font-weight: bold;
-          border: 1px solid black;
+          border: 1px solid transparent;
+          border-radius: 15px;
+          box-shadow: 0px 0px 2px gray;
+
+        }
+
+        .cntnui {
+          background-color: rgb(238, 236, 236);
+          padding-top: 20px;
+          padding-right: 5px;
+          border: 1px solid transparent;
+          border-radius: 15px;
+          box-shadow: 0px 0px 5px gray;
+          margin-bottom: 20px;
+          margin-right: 20px;
+          
+        }
+
+        .totalba {
+          background-color: #f0f0f0;
+          border: 1px solid transparent;
+          border-radius: 15px;
+          box-shadow: 0px 0px 3px gray;
+          padding-top: 20px;
+          padding-left: 15px;
+          display: grid;
+        }
+
+        .hpj {
+          background-color: rgb(238, 236, 236);
+          box-shadow: 0px 0px 5px gray;
+          padding: 25px 25px 25px 25px;
+          width: 23rem;
+          border: 1px solid transparent;
+          border-radius: 15px;
+        }
+
+        table, th, td, tr {
+            width: 1rem;
         }
     </style>
 
 </head>
-<body style="font-family: monospace;">
+<body>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>HPP dan HJP Calculator</h1>
+                <div style="border: 1px solid transparent; width: fit-content; box-shadow: 0px 0px 5px gray; padding: 10px 10px 0px 10px; border-radius: 15px;">
+                    <h3><b>HPP dan HJP Calculator</b></h3>
+                </div>
             </div>
+        </div>
+        <div style="background-color: #f0f0f0; box-shadow: 0px 0px 5px gray; width: fit-content; padding: 10px 10px 10px 10px; border-radius: 15px; margin-top: 20px;">
+            <details>
+                <summary>
+                    <b>Cara Pemakaian</b>
+                </summary>
+                <p style="width: 20rem;">
+                    1. Masukan Data Alat dan Bahan kedalam masing-masing Tabel<br>
+                    2. Pencet Tombol Hitung HPP untuk melihat hasil HPP<br>
+                    3. Pencet Tombol Hitung HJP untuk melihat hasil HJP<br>
+                    4. Pencet Tombol Mata untuk melihat Rumus Penghitungan
+                </p>
+            </details>
         </div>
         <br>
         <br>
-        <div class="row">
+        <div class="row ml-2">
+
+            <div class="cntnui">
+
             <div class="col-md-6 mb-5">
                 <h2>Tabel Alat</h2>
+                <br>
                 <form id="form-alat">
                     <div class="form-group">
                         <label for="nama-alat">Nama Alat</label>
@@ -48,7 +108,8 @@
                         <label for="harga-alat">Harga</label>
                         <input type="text" id="harga-alat" class="form-control" required>
                     </div>
-                    <button type="submit" class="btn subbtn">+</button>
+                    <br>
+                    <button type="submit" class="btn subbtn">Masukan</button>
                 </form>
                 <br>
                 <table id="tabel-alat" class="table table-striped">
@@ -60,18 +121,27 @@
                             <th>Satuan</th>
                             <th>Harga</th>
                             <th>Total</th>
-                            <th>Aksi</th>
+                            <th>Hapus</th>
                         </tr>
                     </thead>
                     <tbody id="tabel-body-alat">
                     </tbody>
                 </table>
-                <p id="total-alat">Total: Rp <span id="total-harga-alat">0</span></p>
+                <br>
+                <br>
+                <div>
+                    <p id="total-alat">Total Biaya Alat: Rp <span id="total-harga-alat">0</span></p>
+                </div>
             </div>
+
+            </div>
+
+            <div class="cntnui">
 
             <div class="col-md-6 mb-3">
 
                 <h2>Tabel Bahan</h2>
+                <br>
                 <form id="form-bahan">
                     <div class="form-group">
                         <label for="nama-bahan">Nama Bahan</label>
@@ -89,7 +159,8 @@
                         <label for="harga-bahan">Harga</label>
                         <input type="text" id="harga-bahan" class="form-control" required>
                     </div>
-                    <button type="submit" class="btn subbtn">+</button>
+                    <br>
+                    <button type="submit" class="btn subbtn">Masukan</button>
                 </form>
                 <br>
                 <table id="tabel-bahan" class="table table-striped">
@@ -101,19 +172,30 @@
                             <th>Satuan</th>
                             <th>Harga</th>
                             <th>Total</th>
-                            <th>Aksi</th>
+                            <th>Hapus</th>
                         </tr>
                     </thead>
                     <tbody id="tabel-body-bahan">
                     </tbody>
                 </table>
-                <p id="total-bahan">Total: Rp <span id="total-harga-bahan">0</span></p>
+                <br>
+                <br>
+                <div>
+                    <p id="total-bahan">Total Biaya Bahan: Rp <span id="total-harga-bahan">0</span></p>
+                </div>
             </div>
+
+            </div>
+
         </div>
-        <div class="row">
+        <br>
+        <div class="row ml-2">
+
+            <div style="background-color: #f0f0f0; border: 1px solid transparent; border-radius: 30px; box-shadow: 0px 0px 5px gray; padding-top: 17px;">
+
             <div class="col-md-12">
-                <p id="total-semua">Total Keseluruhan: Rp <span id="total-keseluruhan">0</span>
-                    <button class="btn btn-secondary" id="tampilkan-rumus-total" style="margin-left: 10px;"><i class="fa-solid fa-eye"></i></button>
+                <p id="total-semua"><b>Total Keseluruhan: Rp </b><span id="total-keseluruhan">0</span>
+                    <button class="btn btn-secondary" id="tampilkan-rumus-total" style="margin-left: 10px; border-radius: 30px; box-shadow: 0px 0px 3px gray;"><i class="fa-solid fa-eye"></i></button>
                     <div id="tampilan-penghitungan-total" style="display: none; margin-top: 10px;">
                         <h4>Rumus Penghitungan:</h4>
                         <p>Total Keseluruhan = Total Bahan + Total Alat</p>
@@ -123,39 +205,61 @@
                     </div>
                 </p>
             </div>
+
+            </div>
+
         </div>
         <br>
+        
         <br>
         <div class="row">
             <div class="col-md-12">
+
+                <div class="hpj">
+
                 <h3>Harga Per Produk</h3>
                 <p id="harga-per-produk">Rp <span id="harga-per-produk-value">0</span></p>
-                <button class="btn subbtn" id="hitung-harga-per-produk">Hitung Harga Per Produk</button>
-                <button class="btn btn-secondary" id="tampilkan-rumus"><i class="fa-solid fa-eye"></i></button>
+                <button class="btn subbtn" id="hitung-harga-per-produk">Hitung HPP</button>
+                <button class="btn btn-secondary" id="tampilkan-rumus" style="border-radius: 30px; box-shadow: 0px 0px 3px gray;"><i class="fa-solid fa-eye"></i></button>
                 <div id="tampilan-penghitungan" style="display: none;">
+                    <br>
                     <h4>Rumus Penghitungan:</h4>
                     <p>(Total Bahan + Total Alat) / 100</p>
                     <p>Total Bahan: Rp <span id="total-bahan-penghitungan">0</span></p>
                     <p>Total Alat: Rp <span id="total-alat-penghitungan">0</span></p>
                     <p>Harga Per Produk: Rp <span id="harga-per-produk-penghitungan">0</span></p>
                 </div>
+
+                </div>
+                
                 <br>
                 <br>
+
+                <div class="hpj">
+
                 <h3>Harga Jual Produk</h3>
                 <div class="form-group">
                     <label for="margin">Margin</label>
-                    <input type="number" id="margin" class="form-control" value="0" required>
+                    <input type="number" id="margin" class="form-control" value="0" required style="width: 7rem">
                 </div>
-                <button class="btn subbtn" id="hitung-harga-jual-produk">Hitung Harga Jual Produk</button>
-                <button class="btn btn-secondary" id="tampilkan-rumus-harga-jual"><i class="fa-solid fa-eye"></i></button>
-                <p id="harga-jual-produk">Rp <span id="harga-jual-produk-value">0</span></p>
+                <button class="btn subbtn" id="hitung-harga-jual-produk">Hitung HJP</button>
+                <button class="btn btn-secondary" id="tampilkan-rumus-harga-jual" style="border-radius: 30px; box-shadow: 0px 0px 3px gray;"><i class="fa-solid fa-eye"></i></button>
+                <div style="margin-top: 20px;">
+                    <p id="harga-jual-produk">Rp <span id="harga-jual-produk-value">0</span></p>
+                </div>
                 <div id="tampilan-penghitungan-harga-jual" style="display: none;">
+                    
                     <h4>Rumus Penghitungan:</h4>
                     <p>Harga Jual Produk = Harga Per Produk / (1 - Margin)</p>
                     <p>Harga Per Produk: Rp <span id="harga-per-produk-penghitungan-harga-jual">0</span></p>
                     <p>Margin: <span id="margin-penghitungan-harga-jual">0</span></p>
                     <p>Harga Jual Produk: Rp <span id="harga-jual-produk-penghitungan-harga-jual">0</span></p>
                 </div>
+
+                </div>
+
+                <br>
+                
             </div>
         </div>
     </div>
@@ -261,7 +365,7 @@
                             <td>${data.satuan}</td>
                             <td>Rp ${data.harga.toLocaleString()}</td>
                             <td>Rp ${data.total.toLocaleString()}</td>
-                            <td><span class="hapus-data-alat" data-index="${index}" style="color: white; background-color: red; padding: 5px; border-radius: 5px; cursor: pointer;"><i class="fa-solid fa-x"></i></span></td>
+                            <td><span class="hapus-data-alat" data-index="${index}" style="color: white; background-color: red; padding: 8px; border-radius: 3px; cursor: pointer;"><i class="fa-solid fa-x"></i></span></td>
                         </tr>
                     `);
                     totalSemuaAlat += data.total;
